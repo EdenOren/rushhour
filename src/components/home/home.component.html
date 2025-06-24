@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="container__header">
+    header
+  </div>
+  <div class="container__content">
+    <div class="container__controls">
+      @for (control of controls; track control.name; let isFirst = $first; let isLast = $last) {
+        <div 
+          class="container__control" 
+          [ngClass]="{ 'container__control--isFirst': isFirst, 'container__control--isLast': isLast }"
+        >{{ control.name }}</div>
+      }
+    </div>
+    <div class="container__grid">
+      <grid/>
+    </div>
+  </div>
+  <div class="container__footer">
+    footer
+  </div>
+</div>

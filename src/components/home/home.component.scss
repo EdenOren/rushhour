@@ -1,0 +1,66 @@
+@use 'variables' as var;
+
+%box-style {
+    border: var.$default-border;
+    border-radius: var.$border-radius;
+}
+%round-top {
+    border-top-left-radius: var.$border-radius;
+    border-top-right-radius: var.$border-radius;
+}
+%round-bottom {
+    border-bottom-left-radius: var.$border-radius;
+    border-bottom-right-radius: var.$border-radius;
+}
+
+:host {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    margin: 4vh 20vw;
+    @extend %box-style;
+    &__header {
+        padding: 32px;
+        background-color: var.$header-footer-bg;
+        @extend %round-top;
+    }
+    &__content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        border-bottom: var.$default-border;
+        border-top: var.$default-border;
+        padding: 32px;
+    }
+    &__controls {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        background-color: var.$controls-bg;
+        border: var.$default-border;
+        border-bottom: none;
+        @extend %round-top;
+    }
+    &__control {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 8px;
+        flex: 1;
+    }
+    &__footer {
+        padding: 32px;
+        background-color: var.$header-footer-bg;
+        @extend %round-bottom;
+    }
+    &__grid {
+        flex: 1;
+    }
+}

@@ -1,0 +1,7 @@
+<gridster class="grid" [options]="options">
+  @for (item of dashboard; track item; let i = $index) {
+    <gridster-item [item]="item">
+      {{i}}
+    </gridster-item>
+  }
+</gridster>
