@@ -54,6 +54,26 @@
         align-items: center;
         padding: 8px;
         flex: 1;
+        background: none;
+        border: none;
+        cursor: pointer;
+        border-inline-start: var.$default-border;
+        &:hover {
+            background-color: var.$controls-hover-bg;
+        }
+        &--first {
+            border-inline-start: none;
+            &:hover {
+                background-color: var.$controls-hover-bg;
+                border-start-start-radius: var.$border-radius;
+            }
+        }
+        &--last {
+            &:hover {
+                background-color: var.$controls-hover-bg;
+                border-start-end-radius: var.$border-radius;
+            }
+        }
     }
     &__footer {
         padding: 32px;

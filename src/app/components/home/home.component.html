@@ -5,10 +5,16 @@
   <div class="container__content">
     <div class="container__controls">
       @for (control of controls; track control.name; let isFirst = $first; let isLast = $last) {
-        <div 
+        <button 
+          (click)="onControlClick(control)"
           class="container__control" 
-          [ngClass]="{ 'container__control--isFirst': isFirst, 'container__control--isLast': isLast }"
-        >{{ control.name }}</div>
+          [ngClass]="{ 'container__control--first': isFirst, 'container__control--last': isLast }"
+        >{{ control.name }}</button>
+        <!-- @if (control.type === gameControlType.Dropdown) {
+          @for (option of control.options; track option; let isFirst = $first; let isLast = $last) {
+            <button>{{ option }}</button>
+          }
+        } -->
       }
     </div>
     <div class="container__grid">

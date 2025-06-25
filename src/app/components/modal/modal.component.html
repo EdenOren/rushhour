@@ -1,0 +1,13 @@
+<div class="dialog" cdkDrag>
+    <div class="dialog__header" cdkDragHandle>
+        <img src="assets/icons/move.svg" alt="Move" width="24" height="24"/>
+        <div class="dialog__title">
+            {{ config.title }}
+        </div>
+        <div class="dialog__close" (click)="onClose()">
+            <img src="assets/icons/close.svg" alt="Close" width="24" height="24"/>
+        </div>
+    </div>
+    <div class="dialog__content" [innerHTML]="config.content">
+    </div>
+</div>
