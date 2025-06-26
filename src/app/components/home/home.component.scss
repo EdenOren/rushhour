@@ -26,9 +26,12 @@
     margin: 4vh 20vw;
     @extend %box-style;
     &__header {
-        padding: 32px;
         background-color: var.$header-footer-bg;
         @extend %round-top;
+        padding: 32px;
+    }
+    &__title {
+        font-size: 36px;
     }
     &__content {
         flex: 1;
@@ -58,25 +61,65 @@
         border: none;
         cursor: pointer;
         border-inline-start: var.$default-border;
+        font: inherit;
+        font-weight: 700;
         &:hover {
             background-color: var.$controls-hover-bg;
         }
         &--first {
             border-inline-start: none;
             &:hover {
-                background-color: var.$controls-hover-bg;
                 border-start-start-radius: var.$border-radius;
             }
         }
         &--last {
             &:hover {
-                background-color: var.$controls-hover-bg;
                 border-start-end-radius: var.$border-radius;
             }
         }
     }
+    &__menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        z-index: 2;
+        background-color: #ffffff;
+        border: var.$default-border;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+        box-sizing: border-box;
+        display: none;
+        @extend %round-bottom;
+        :hover {
+            display: block;
+        }
+    }
+    &__menu-item {
+        display: block;
+        width: 100%;
+        padding: 8px 16px;
+        border: none;
+        background: none;
+        text-align: center;
+        cursor: pointer;
+        white-space: nowrap;
+        &:hover {
+            background-color: var.$controls-hover-bg;
+        }
+    }
+    &__dropdown-wrapper {
+        flex: 1;
+        position: relative;
+        display: flex;
+        &:hover {
+            .container__menu {
+                display: block;
+            }
+        }
+    }
     &__footer {
-        padding: 32px;
+        padding: 16px;
         background-color: var.$header-footer-bg;
         @extend %round-bottom;
     }

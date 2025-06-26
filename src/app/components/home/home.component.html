@@ -1,20 +1,14 @@
 <div class="container">
   <div class="container__header">
-    header
+    <span class="container__title">Rush Hour</span>
   </div>
   <div class="container__content">
     <div class="container__controls">
       @for (control of controls; track control.name; let isFirst = $first; let isLast = $last) {
-        <button 
-          (click)="onControlClick(control)"
-          class="container__control" 
-          [ngClass]="{ 'container__control--first': isFirst, 'container__control--last': isLast }"
-        >{{ control.name }}</button>
-        <!-- @if (control.type === gameControlType.Dropdown) {
-          @for (option of control.options; track option; let isFirst = $first; let isLast = $last) {
-            <button>{{ option }}</button>
-          }
-        } -->
+          <ng-container 
+            [ngTemplateOutlet]="control.type === gameControlType.Button ? controlButton : controlDropdownButton"
+            [ngTemplateOutletContext]="{ control: control, isFirst: isFirst, isLast: isLast }"
+          />
       }
     </div>
     <div class="container__grid">
@@ -22,6 +16,37 @@
     </div>
   </div>
   <div class="container__footer">
-    footer
   </div>
 </div>
+
+<ng-template #controlButton let-control="control" let-isFirst="isFirst" let-isLast="isLast">
+      <button 
+        (click)="onControlClick(control)"
+        class="container__control" 
+        [ngClass]="{ 'container__control--first': isFirst, 'container__control--last': isLast }"
+      >{{ control.name }}</button>
+</ng-template>
+
+<ng-template #controlDropdownButton let-control="control" let-isFirst="isFirst" let-isLast="isLast">
+    <div class="container__dropdown-wrapper">
+          <button 
+          (click)="onControlClick(control)"
+          (mouseover)="onMouseOver()"
+          class="container__control" 
+          [ngClass]="{ 'container__control--first': isFirst, 'container__control--last': isLast }"
+        >
+        @if (control.id === gameControlAction.Difficulty) {
+          {{ control.name }}: {{ MAP_DIFFICULTY_TO_DESCRIPTION[this.difficulty] }}
+        } @else {
+          {{ control.name }}
+        }
+        </button>
+        @if (allowDropdown) {
+          <div class="container__menu">
+            @for (option of control.options; track option) {
+              <button (click)="onControlOptionClick(control, option)" class="container__menu-item">{{ option.name }}</button>
+            }
+          </div>
+        }
+    </div>
+</ng-template>
