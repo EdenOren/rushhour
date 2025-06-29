@@ -14,3 +14,14 @@ export enum Difficulty {
     Medium,
     Hard
 }
+
+export enum VehicleType {
+    Car,
+    Truck,
+    GreenCar
+}
+
+export enum DragDirection {
+    Horizontal,
+    Vertical
+}

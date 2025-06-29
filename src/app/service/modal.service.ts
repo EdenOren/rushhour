@@ -36,11 +36,12 @@ export class ModalService implements OnDestroy {
         this._overlayRef = this._overlay.create({
             positionStrategy: this._overlay.position().global().centerHorizontally().centerVertically(),
             hasBackdrop: true,
+            backdropClass: 'modal-backdrop'
         });
         const modalPortal = new ComponentPortal(ModalComponent, this._globalVcr);
         const componentRef = this._overlayRef.attach(modalPortal);
         componentRef.instance.config = config;
-        
+
         componentRef.instance.close.subscribe(() => this.close());
         this._overlayRef.backdropClick().subscribe(() => this.close());
 

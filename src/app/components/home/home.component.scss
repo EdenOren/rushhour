@@ -3,6 +3,7 @@
 %box-style {
     border: var.$default-border;
     border-radius: var.$border-radius;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 %round-top {
     border-top-left-radius: var.$border-radius;
@@ -23,7 +24,7 @@
     flex-direction: column;
     justify-content: center;
     height: 100%;
-    margin: 4vh 20vw;
+    margin: 4vh 26vw;
     @extend %box-style;
     &__header {
         background-color: var.$header-footer-bg;
@@ -57,7 +58,7 @@
         align-items: center;
         padding: 8px;
         flex: 1;
-        background: none;
+        background-color: unset;
         border: none;
         cursor: pointer;
         border-inline-start: var.$default-border;
@@ -75,6 +76,12 @@
         &--last {
             &:hover {
                 border-start-end-radius: var.$border-radius;
+            }
+        }
+        &--disabled {
+            cursor: default;
+            &:hover {
+                background-color: unset;
             }
         }
     }
@@ -125,5 +132,7 @@
     }
     &__grid {
         flex: 1;
+        border: var.$default-border;
+        border-top: none;
     }
 }

@@ -12,7 +12,11 @@
       }
     </div>
     <div class="container__grid">
-      <grid/>
+      @if (!isLoadingNewGame()) {
+      <grid [config]="vehiclesConfig()" [exitRow]="exitRow" (reloadGrid)="reloadGrid()"/>
+      } @else {
+        <loader/>
+      }
     </div>
   </div>
   <div class="container__footer">
@@ -20,27 +24,31 @@
 </div>
 
 <ng-template #controlButton let-control="control" let-isFirst="isFirst" let-isLast="isLast">
+  @let isButtonDisabled = isLoadingNewGame() && (control.id === gameControlAction.NewGame || control.id === gameControlAction.Difficulty);
       <button 
         (click)="onControlClick(control)"
         class="container__control" 
-        [ngClass]="{ 'container__control--first': isFirst, 'container__control--last': isLast }"
-      >{{ control.name }}</button>
+        [disabled]="isButtonDisabled"
+        [ngClass]="{ 
+          'container__control--first': isFirst,
+          'container__control--last': isLast,
+          'container__control--disabled': isButtonDisabled
+        }"
+      >        
+      @if (control.id === gameControlAction.Difficulty) {
+          {{ control.name }}: {{ MAP_DIFFICULTY_TO_DESCRIPTION[this.difficulty] }}
+      } @else {
+          {{ control.name }}
+      }
+      </button>
 </ng-template>
 
 <ng-template #controlDropdownButton let-control="control" let-isFirst="isFirst" let-isLast="isLast">
     <div class="container__dropdown-wrapper">
-          <button 
-          (click)="onControlClick(control)"
-          (mouseover)="onMouseOver()"
-          class="container__control" 
-          [ngClass]="{ 'container__control--first': isFirst, 'container__control--last': isLast }"
-        >
-        @if (control.id === gameControlAction.Difficulty) {
-          {{ control.name }}: {{ MAP_DIFFICULTY_TO_DESCRIPTION[this.difficulty] }}
-        } @else {
-          {{ control.name }}
-        }
-        </button>
+        <ng-container 
+          [ngTemplateOutlet]="controlButton"
+          [ngTemplateOutletContext]="{ control: control, isFirst: isFirst, isLast: isLast }"
+        />
         @if (allowDropdown) {
           <div class="container__menu">
             @for (option of control.options; track option) {

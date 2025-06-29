@@ -2,6 +2,11 @@ import { Difficulty, GameControlAction, GameControlType } from "../models/app.en
 import { GameControl } from "../models/app.model";
 import { ModalConfig } from "./modal.service";
 
+export const GRID_ROWS: number = 6;
+export const GRID_COLS: number = 6;
+export const GRID_SIZE: number = GRID_ROWS * GRID_COLS;
+export const DEFAULT_EXIT_ROW: number = 3;
+
 export function getMainControls(): GameControl[] {
     return [
     {

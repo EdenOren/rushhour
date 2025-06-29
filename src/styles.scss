@@ -18,3 +18,7 @@ html, body {
     margin: 0;
     font-family: "Gaegu", sans-serif;
 }
+
+.cdk-overlay-backdrop.modal-backdrop {
+  background-color: rgba(0, 0, 0, 0.75);
+}
