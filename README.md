@@ -62,8 +62,4 @@ Make sure you have the following installed:
 -   Angular CLI: `npm install -g @angular/cli`
 -   Vercel CLI: `npm install -g vercel`
 
-## 📄 License
-
-This project is licensed under the MIT License - see the LICENSE.md file for details.
-
 ---
