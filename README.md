@@ -5,7 +5,8 @@ A modern take on the classic Rush Hour puzzle game, powered by Google's Gemini A
 **[➡️ View Live Demo](https://rushhour-ai.vercel.app)**
 
  
-*(Note: Replace with an actual screenshot of your game)*
+![image](https://github.com/user-attachments/assets/645bc27c-932b-4811-bb50-b7790d8802d9)
+
 
 ---
 
