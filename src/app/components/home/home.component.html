@@ -13,13 +13,23 @@
     </div>
     <div class="container__grid">
       @if (!isLoadingNewGame()) {
-      <grid [config]="vehiclesConfig()" [exitRow]="exitRow" (reloadGrid)="reloadGrid()"/>
+      <grid 
+        [config]="vehiclesConfig()" 
+        [exitRow]="exitRow" 
+        (onGridError)="reloadGrid()"
+        (onGridComplete)="onGridComplete()"
+        (onUserError)="onGridUserError($event)"
+      />
       } @else {
         <loader/>
       }
     </div>
   </div>
   <div class="container__footer">
+      <span>
+        Game generation is powered by Gemini. It might take a few seconds to load - thanks for waiting!
+      </span>
+      <span>&copy; 2025 Eden Oren</span>
   </div>
 </div>
 
@@ -58,3 +68,7 @@
         }
     </div>
 </ng-template>
+
+@if (gameWon()) {
+  <particles/>
+}

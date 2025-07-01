@@ -25,3 +25,9 @@ export enum DragDirection {
     Horizontal,
     Vertical
 }
+
+export enum UserError {
+    NoOverlapAllowed,
+    CanOnlyMoveHorizontaly,
+    CanOnlyMoveVertically
+}

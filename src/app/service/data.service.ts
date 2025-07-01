@@ -1,3 +1,4 @@
+import { ParticlesOptions } from "@tsparticles/engine";
 import { Difficulty, GameControlAction, GameControlType } from "../models/app.enums";
 import { GameControl } from "../models/app.model";
 import { ModalConfig } from "./modal.service";
@@ -61,6 +62,40 @@ export function getGameRulesModalConfig(): ModalConfig {
       </ul>
       <hr>
       <h3>Winning</h3>
-      <p>You win when your <span style="color: green; font-weight: bold;">green car</span> slides completely off the board through the exit!</p>`
+      <p>You win when your <span style="color: green; font-weight: bold;">green car</span> slides towards the red exit door!</p>`
+  };
 };
-}
+
+export const particlesDefaulOptions: Partial<ParticlesOptions> = {
+  fullScreen: {
+    zIndex: 1
+  },
+  particles: {
+    number: {
+      value: 100
+    },
+    color: {
+      value: ["#80CBC4", "#B4EBE6", "#00FF9C"]
+    },
+    shape: {
+      type: ["circle"]
+    },
+    opacity: {
+      value: 0.8
+    },
+    size: {
+      value: { min: 2, max: 5 }
+    },
+    move: {
+      enable: true,
+      speed: 5,
+      direction: "outside",
+      random: true,
+      straight: false,
+      outModes: {
+        default: "out"
+      }
+    }
+  },
+  detectRetina: true
+};

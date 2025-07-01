@@ -1,18 +1,21 @@
-<div class="grid">
-  <gridster 
-    class="grid__container" 
-    [options]="options"
-  >
-    @for (item of grid; track item; let i = $index) {
-      <gridster-item 
-        class="grid__item" 
-        [style.backgroundColor]="item['color']" 
-        [item]="item"
-        (itemChange)="itemChange($event)"
-            (itemDragStart)="itemDragStart($event)"
-    (itemDragStop)="itemDragEnd($event)"
-      />
+@if (options) {
+  <div class="grid">
+    @if (grid.length) {
+      <gridster 
+        [style.backgroundColor]="'#ffffff'"
+        [options]="options"
+      >
+        @for (item of grid; track item; let i = $index) {
+          <gridster-item 
+            class="grid__item" 
+            [style.backgroundColor]="item['color']" 
+            [item]="item"
+          />
+        }
+      </gridster>
+      <div class="grid__exit" [style.top]="'calc(100% / 6 * ' + exitRow + ')'"></div>
+    } @else {
+      <span class="grid__empty">Start a new Game to play</span>
     }
-  </gridster>
-  <div class="grid__exit" [style.top]="'calc(100% / 6 * ' + exitRow + ')'"></div>
-</div>
+  </div>
+}

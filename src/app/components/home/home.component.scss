@@ -29,10 +29,13 @@
     &__header {
         background-color: var.$header-footer-bg;
         @extend %round-top;
-        padding: 32px;
+        padding: 20px;
     }
     &__title {
         font-size: 36px;
+        user-select: none;
+        display: flex;
+        justify-content: center;
     }
     &__content {
         flex: 1;
@@ -126,7 +129,12 @@
         }
     }
     &__footer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         padding: 16px;
+        font-family: sans-serif;
+        font-size: 12px;
         background-color: var.$header-footer-bg;
         @extend %round-bottom;
     }

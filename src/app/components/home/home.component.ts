@@ -1,19 +1,22 @@
 import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
 import { GridComponent } from '../grid/grid.component';
 import { CommonModule } from '@angular/common';
-import { Difficulty, DragDirection, GameControlAction, GameControlType, VehicleType } from '../../models/app.enums';
+import { Difficulty, GameControlAction, GameControlType, UserError, VehicleType } from '../../models/app.enums';
 import { ModalConfig, ModalService } from '../../service/modal.service';
 import { DEFAULT_EXIT_ROW, getGameRulesModalConfig, getMainControls, GRID_SIZE } from '../../service/data.service';
 import { GameControl, GameControlOption, NewGameResponse, Vehicle } from '../../models/app.model';
 import { ApiService } from '../../service/api.service';
 import { catchError } from 'rxjs';
 import { LocalStorageItems as LocalStorageItem, StorageService } from '../../service/storage.service';
-import { LoaderComponent } from "../../ui/loader/loader.component";
+import { LoaderComponent } from "../../shared/loader/loader.component";
+import { getDraggingDirection } from '../../shared/helper/helper.helper';
+import { ToastService } from '../../service/toaster.service';
+import { ParticlesComponent } from "../../shared/particles/particles.component";
 
 @Component({
   selector: 'home',
   standalone: true,
-  imports: [CommonModule, GridComponent, LoaderComponent],
+  imports: [CommonModule, GridComponent, LoaderComponent, ParticlesComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -32,11 +35,14 @@ export class HomeComponent {
   public exitRow: number = DEFAULT_EXIT_ROW;
   public vehiclesConfig: WritableSignal<Vehicle[]> = signal<Vehicle[]>([]);
   public isLoadingNewGame: WritableSignal<boolean> = signal<boolean>(false);
+  public gameWon: WritableSignal<boolean> = signal<boolean>(false);
+
 
   constructor(
     private modalService: ModalService,
     private apiService: ApiService,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private toastService: ToastService
   ) {
     this.controls = getMainControls();
     this.setGameParamsFromCache();
@@ -59,21 +65,13 @@ export class HomeComponent {
     const vehicleConfig: Vehicle[] = response.vehicles.map(
       (vehicle: Vehicle) => ({
         ...vehicle,
-        dragging: this.getDraggingDirection(vehicle),
+        dragging: getDraggingDirection(vehicle),
         color: this.getCarColor(vehicle)
       })
     );
 
     this.exitRow = response.exitRow;
     this.vehiclesConfig.set(vehicleConfig);
-  }
-
-  private getDraggingDirection(vehicle: Vehicle): DragDirection {
-    if (vehicle.cols > vehicle.rows) {
-      return DragDirection.Horizontal;
-    } else {
-      return DragDirection.Vertical;
-    }
   }
   
   private getCarColor(car: Vehicle): string {
@@ -92,11 +90,13 @@ export class HomeComponent {
     })
     .pipe(catchError((error) => {
       this.isLoadingNewGame.set(false);
+      this.gameWon.set(false);
       throw error;
     }))
     .subscribe((response: NewGameResponse) => {
       this.setGameParams(response);
       this.isLoadingNewGame.set(false);
+      this.gameWon.set(false);
       this.storageService.setItem(LocalStorageItem.GameCache, response);
     });
   }
@@ -137,5 +137,31 @@ export class HomeComponent {
       this.createNewGame();
     }
   }
+
+  public onGridComplete(): void {
+    this.gameWon.set(true);
+    this.toastService.success('You won!');
+    this.storageService.removeItem(LocalStorageItem.GameCache);
+    this.createNewGame();
+  }
+
+  public onGridUserError(event: UserError): void {
+    let errorMessage: string = '';
+    switch (event) {
+      case UserError.NoOverlapAllowed:
+        errorMessage = 'No overlap allowed';
+        break;
+      case UserError.CanOnlyMoveHorizontaly:
+        errorMessage = 'Only moves left and right';
+        break;
+      case UserError.CanOnlyMoveVertically:
+        errorMessage = 'Only moves up and down';
+        break;
+    }
+    if (errorMessage) {
+      this.toastService.error(errorMessage);
+    }
+  }
+
 }
 
