@@ -1,27 +1,68 @@
-# Rushhour
+# Rush Hour: AI Gridlock Escape!
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.1.2.
+A modern take on the classic Rush Hour puzzle game, powered by Google's Gemini AI to generate unique and challenging puzzles on demand. Move the cars and trucks to clear a path for your green car to reach the exit!
 
-## Development server
+**[➡️ View Live Demo](https://rushhour-ai.vercel.app)**
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+ 
+*(Note: Replace with an actual screenshot of your game)*
 
-## Code scaffolding
+---
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## ✨ Features
 
-## Build
+-   **Dynamic Puzzle Generation**: Never play the same game twice! A new puzzle is generated every time you click "New Game".
+-   **AI-Powered**: Leverages Google's Gemini AI to create valid, solvable puzzles based on your chosen difficulty.
+-   **Multiple Difficulty Levels**: Choose between Easy, Medium, and Hard to match your skill level.
+-   **Interactive Grid**: A smooth, draggable interface for moving the vehicles.
+-   **"How to Play" Guide**: A quick in-game modal to explain the rules to new players.
+-   **Sleek & Responsive UI**: A clean and modern design that works on various screen sizes.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+---
 
-## Running unit tests
+## 🤖 How It Works
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+This project combines a modern Angular frontend with an intelligent serverless backend.
 
-## Running end-to-end tests
+1.  **User Request**: The player selects a difficulty and requests a new game from the Angular frontend.
+2.  **API Call**: The frontend sends a request to a Vercel Serverless Function.
+3.  **AI Puzzle Generation**: The serverless function acts as a secure backend that calls the **Google Gemini API**. It provides a detailed system prompt instructing the AI to act as a Rush Hour puzzle expert.
+4.  **Structured Response**: The AI is instructed to return a puzzle that is guaranteed to be valid, solvable, and in a specific JSON format.
+5.  **Game Setup**: The frontend receives the JSON data and dynamically builds the game board, placing the vehicles in their starting positions.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+---
 
-## Further help
+## 🛠️ Technologies Used
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+-   **Frontend**:
+    -   [Angular](https://angular.io/)
+    -   [TypeScript](https://www.typescriptlang.org/)
+    -   [SCSS](https://sass-lang.com/)
+    -   [ngx-gridster2](https://github.com/tiberiuzuld/angular-gridster2) for the draggable grid layout.
+    -   [ngx-toastr](https://github.com/scttcper/ngx-toastr) for notifications.
+
+-   **Backend**:
+    -   [Node.js](https://nodejs.org/)
+    -   [Vercel Serverless Functions](https://vercel.com/docs/functions)
+
+-   **AI**:
+    -   [Google Gemini API](https://ai.google.dev/) (`gemini-2.5-flash` model)
+
+---
+
+## 🚀 Getting Started
+
+Follow these instructions to get a copy of the project up and running on your local machine for development and testing purposes.
+
+### Prerequisites
+
+Make sure you have the following installed:
+-   Node.js (which includes npm)
+-   Angular CLI: `npm install -g @angular/cli`
+-   Vercel CLI: `npm install -g vercel`
+
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE.md file for details.
+
+---
