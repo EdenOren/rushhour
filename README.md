@@ -2,11 +2,9 @@
 
 A modern take on the classic Rush Hour puzzle game, powered by Google's Gemini AI to generate unique and challenging puzzles on demand. Move the cars and trucks to clear a path for your green car to reach the exit!
 
-**[➡️ View Live Demo](https://rushhour-ai.vercel.app)**
+**➡️ View Live Demo [Vercel](https://rushhour-ai.vercel.app)** / **[Github](https://edenoren.github.io/rushhour/)**
 
- 
-![image](https://github.com/user-attachments/assets/645bc27c-932b-4811-bb50-b7790d8802d9)
-
+![image](https://github.com/user-attachments/assets/3cc9854e-4466-41b6-88fc-d3902416ae49)
 
 ---
 
