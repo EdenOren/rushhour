@@ -48,16 +48,3 @@ This project combines a modern Angular frontend with an intelligent serverless b
     -   [Google Gemini API](https://ai.google.dev/) (`gemini-2.5-flash` model)
 
 ---
-
-## 🚀 Getting Started
-
-Follow these instructions to get a copy of the project up and running on your local machine for development and testing purposes.
-
-### Prerequisites
-
-Make sure you have the following installed:
--   Node.js (which includes npm)
--   Angular CLI: `npm install -g @angular/cli`
--   Vercel CLI: `npm install -g vercel`
-
----
