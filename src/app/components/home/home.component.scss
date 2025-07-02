@@ -85,12 +85,11 @@
             cursor: default;
             &:hover {
                 background-color: unset;
-            }
-            .container__menu {
-                &:hover {
+                .container__menu {
                     display: none !important;
                 }
             }
+
         }
     }
     &__menu {

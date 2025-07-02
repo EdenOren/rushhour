@@ -5,9 +5,10 @@
   <div class="container__content">
     <div class="container__controls">
       @for (control of controls; track control.name; let isFirst = $first; let isLast = $last) {
+          @let isButtonDisabled = isLoadingNewGame() && (control.id === gameControlAction.NewGame || control.id === gameControlAction.Difficulty);
           <ng-container 
             [ngTemplateOutlet]="control.type === gameControlType.Button ? controlButton : controlDropdownButton"
-            [ngTemplateOutletContext]="{ control: control, isFirst: isFirst, isLast: isLast }"
+            [ngTemplateOutletContext]="{ control: control, isFirst: isFirst, isLast: isLast, isButtonDisabled: isButtonDisabled }"
           />
       }
     </div>
@@ -33,8 +34,7 @@
   </div>
 </div>
 
-<ng-template #controlButton let-control="control" let-isFirst="isFirst" let-isLast="isLast">
-  @let isButtonDisabled = isLoadingNewGame() && (control.id === gameControlAction.NewGame || control.id === gameControlAction.Difficulty);
+<ng-template #controlButton let-control="control" let-isFirst="isFirst" let-isLast="isLast" let-isButtonDisabled="isButtonDisabled">
       <button 
         (click)="onControlClick(control)"
         class="container__control" 
@@ -53,11 +53,11 @@
       </button>
 </ng-template>
 
-<ng-template #controlDropdownButton let-control="control" let-isFirst="isFirst" let-isLast="isLast">
-    <div class="container__dropdown-wrapper">
+<ng-template #controlDropdownButton let-control="control" let-isFirst="isFirst" let-isLast="isLast" let-isButtonDisabled="isButtonDisabled">
+    <div class="container__dropdown-wrapper" [ngClass]="{ 'container__control--disabled': isButtonDisabled }">
         <ng-container 
           [ngTemplateOutlet]="controlButton"
-          [ngTemplateOutletContext]="{ control: control, isFirst: isFirst, isLast: isLast }"
+          [ngTemplateOutletContext]="{ control: control, isFirst: isFirst, isLast: isLast, isButtonDisabled: isButtonDisabled }"
         />
         @if (allowDropdown) {
           <div class="container__menu">
