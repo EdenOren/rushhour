@@ -24,12 +24,12 @@
     flex-direction: column;
     justify-content: center;
     height: 100%;
-    margin: 4vh 26vw;
+    margin: 3vh 26vw;
     @extend %box-style;
     &__header {
         background-color: var.$header-footer-bg;
         @extend %round-top;
-        padding: 20px;
+        padding: 12px;
     }
     &__title {
         font-size: 36px;
@@ -44,7 +44,7 @@
         height: 100%;
         border-bottom: var.$default-border;
         border-top: var.$default-border;
-        padding: 32px;
+        padding: 16px 36px;
     }
     &__controls {
         display: flex;
@@ -85,6 +85,11 @@
             cursor: default;
             &:hover {
                 background-color: unset;
+            }
+            .container__menu {
+                &:hover {
+                    display: none !important;
+                }
             }
         }
     }

@@ -12,6 +12,9 @@ import { LoaderComponent } from "../../shared/loader/loader.component";
 import { getDraggingDirection } from '../../shared/helper/helper.helper';
 import { ToastService } from '../../service/toaster.service';
 import { ParticlesComponent } from "../../shared/particles/particles.component";
+import { CarColor } from '../vehicle/vehicle.component';
+
+const particlesTimeOut: number = 2500;
 
 @Component({
   selector: 'home',
@@ -75,11 +78,13 @@ export class HomeComponent {
   }
   
   private getCarColor(car: Vehicle): string {
-      if (car.type === VehicleType.GreenCar) {
-          return 'green';
-      } else {
-          return 'red';
-      }
+    const colors: CarColor[] = (Object.values(CarColor) as CarColor[]).filter(key => key !== CarColor.Green);
+    if (car.type === VehicleType.GreenCar) {
+        return CarColor.Green;
+    } else {
+        const randomIndex = Math.floor(Math.random() * colors.length);
+        return colors[randomIndex];
+    }
   }
 
   private createNewGame(): void {
@@ -140,6 +145,10 @@ export class HomeComponent {
 
   public onGridComplete(): void {
     this.gameWon.set(true);
+    setTimeout(() => {
+      this.gameWon.set(false);
+    }, particlesTimeOut)
+    
     this.toastService.success('You won!');
     this.storageService.removeItem(LocalStorageItem.GameCache);
     this.createNewGame();

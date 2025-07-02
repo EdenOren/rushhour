@@ -62,7 +62,7 @@ export function getGameRulesModalConfig(): ModalConfig {
       </ul>
       <hr>
       <h3>Winning</h3>
-      <p>You win when your <span style="color: green; font-weight: bold;">green car</span> slides towards the red exit door!</p>`
+      <p>You win when your <span style="color: green; font-weight: bold;">green car</span> slides towards the green exit door!</p>`
   };
 };
 

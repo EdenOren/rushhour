@@ -8,9 +8,8 @@
         @for (item of grid; track item; let i = $index) {
           <gridster-item 
             class="grid__item" 
-            [style.backgroundColor]="item['color']" 
             [item]="item"
-          />
+          ><vehicle [direction]="item['dragging']" [color]="item['color']"/></gridster-item>
         }
       </gridster>
       <div class="grid__exit" [style.top]="'calc(100% / 6 * ' + exitRow + ')'"></div>

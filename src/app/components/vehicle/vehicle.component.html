@@ -1,0 +1,13 @@
+@if (direction === dragDirection.Horizontal) {
+    <div class="vehicle-hor">
+        <div class="vehicle-hor__rear" [style.backgroundColor]="color"></div>
+        <div class="vehicle-hor__body" [style.backgroundColor]="color"></div>
+        <div class="vehicle-hor__front"></div>
+    </div>
+} @else {
+    <div class="vehicle-ver">
+        <div class="vehicle-ver__front"></div>
+        <div class="vehicle-ver__body" [style.backgroundColor]="color"></div>
+        <div class="vehicle-ver__rear" [style.backgroundColor]="color"></div>
+    </div>
+}

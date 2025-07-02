@@ -21,14 +21,10 @@ export class ParticlesComponent implements OnInit {
 
   ngOnInit(): void {
       this.particlesService.init(async (engine) => {
-      console.log(engine);
       await loadSlim(engine);
     });
   }
 
   public particlesLoaded(container: Container): void {
-    console.log(container);
   }
-
-  
 }

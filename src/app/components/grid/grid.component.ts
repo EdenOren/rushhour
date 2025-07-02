@@ -3,10 +3,11 @@ import {GridsterComponent, GridsterConfig, GridsterItem, GridsterItemComponent, 
 import { DEFAULT_EXIT_ROW, GRID_COLS, GRID_ROWS } from '../../service/data.service';
 import { Vehicle } from '../../models/app.model';
 import { DragDirection, UserError as UserError, VehicleType } from '../../models/app.enums';
+import { VehicleComponent } from "../vehicle/vehicle.component";
 
 @Component({
     standalone: true,
-    imports: [GridsterComponent, GridsterItemComponent],
+    imports: [GridsterComponent, GridsterItemComponent, VehicleComponent],
     selector: 'grid',
     templateUrl: './grid.component.html',
     styleUrls: ['./grid.component.scss']
